@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
 import 'package:front/widgets/button_widget.dart';
 import 'package:front/widgets/task_widget.dart';
+import 'package:get/get.dart';
 
 class ShowTasks extends StatelessWidget {
   const ShowTasks({super.key});
@@ -64,10 +65,15 @@ class ShowTasks extends StatelessWidget {
             ),
             width: double.maxFinite,
             height: MediaQuery.of(context).size.height / 3.2,
-            child: Icon(
-              Icons.arrow_back,
-              size: 30,
-              color: AppColors.secondaryColor,
+            child: InkWell(
+              onTap: (){
+                Get.back();
+              },
+              child: Icon(
+                Icons.arrow_back,
+                size: 30,
+                color: AppColors.secondaryColor,
+              ),
             ),
           ),
           Padding(
@@ -78,7 +84,9 @@ class ShowTasks extends StatelessWidget {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.back();
+                  },
                   icon: Icon(
                     Icons.home,
                     size: 30,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
 import 'package:front/widgets/button_widget.dart';
 import 'package:front/widgets/text_field_widget.dart';
+import 'package:get/get.dart';
 
 class AddTask extends StatelessWidget {
   const AddTask({super.key});
@@ -13,7 +14,9 @@ class AddTask extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.back();
+        },
         backgroundColor: AppColors.mainColor,
         child: const Icon(
           Icons.arrow_back,
