@@ -11,6 +11,40 @@ class ShowTasks extends StatelessWidget {
       "Try Harder",
       "Try Smarter",
     ];
+    final leftEditIcon = Container(
+      margin: const EdgeInsets.only(
+        bottom: 8,
+      ),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 150, 151, 149).withOpacity(0.7),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.only(left: 8.0),
+        child: Icon(
+          Icons.edit,
+          color: Colors.white,
+        ),
+      ),
+    );
+    final rightEditIcon = Container(
+      margin: const EdgeInsets.only(
+        bottom: 8,
+      ),
+      alignment: Alignment.centerRight,
+      decoration: BoxDecoration(
+        color: Colors.redAccent,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: const Padding(
+        padding: EdgeInsets.only(right: 8.0),
+        child: Icon(
+          Icons.delete,
+          color: Colors.white,
+        ),
+      ),
+    );
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -68,7 +102,7 @@ class ShowTasks extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  "2",
+                  "${tasks.length}",
                   style: TextStyle(
                     color: AppColors.secondaryColor,
                     fontSize: 26,
@@ -77,12 +111,21 @@ class ShowTasks extends StatelessWidget {
               ],
             ),
           ),
-          Flexible (
+          Flexible(
             child: ListView.builder(
               itemCount: tasks.length,
               itemBuilder: (context, index) {
-                return TaskWidget(
-                  task: tasks[index],
+                return Dismissible(
+                  background: leftEditIcon,
+                  secondaryBackground: rightEditIcon,
+                  onDismissed: (direction) {},
+                  confirmDismiss: (direction) async {
+                    return false;
+                  },
+                  key: ObjectKey(index),
+                  child: TaskWidget(
+                    task: tasks[index],
+                  ),
                 );
               },
             ),
