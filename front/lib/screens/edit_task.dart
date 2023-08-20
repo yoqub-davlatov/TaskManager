@@ -85,9 +85,10 @@ class EditTask extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         if (_dataValidation()) {
-                          Get.find<DataController>().postData(
+                          Get.find<DataController>().updateData(
                             nameController.text,
                             detailController.text,
+                            id
                           );
                           Get.to(
                             () => const ShowTasks(),

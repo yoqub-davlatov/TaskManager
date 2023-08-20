@@ -3,6 +3,8 @@ import 'package:front/controllers/data_controller.dart';
 import 'package:front/screens/home_screen.dart';
 import 'package:get/get.dart';
 
+// adb reverse tcp:8000 tcp:8000
+
 void main() {
   runApp(const MyApp());
 }

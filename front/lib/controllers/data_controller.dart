@@ -59,4 +59,23 @@ class DataController extends GetxController {
     }
     _isLoading = false;
   }
+
+  Future<void> updateData(String name, String detail, String id) async {
+    _isLoading = true;
+
+    Response response = await service.updateData(
+      "${AppConstants.updateTask}/$id",
+      {
+        "name": name,
+        "detail": detail,
+      },
+    );
+    if (response.statusCode == 200) {
+      update();
+      log("data was updated successfully");
+    } else {
+      log("no data was updated");
+    }
+    _isLoading = false;
+  }
 }

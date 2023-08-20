@@ -55,7 +55,18 @@ func deletTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func updateTask(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	for i := 0; i < len(tasks); i++ {
+		if tasks[i].ID == params["id"] {
+			var task Task
+			json.NewDecoder(r.Body).Decode(&task)
+			task.ID = tasks[i].ID
+			task.Date = tasks[i].Date
+			tasks[i] = task
+			return
+		}
+	}
 }
 
 func handleRoutes() {
