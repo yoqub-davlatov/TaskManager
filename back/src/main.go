@@ -7,6 +7,7 @@ import (
 	"math/rand"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -49,6 +50,7 @@ func createTask(w http.ResponseWriter, r *http.Request) {
 	var task Task
 	json.NewDecoder(r.Body).Decode(&task)
 	task.ID = strconv.Itoa(rand.Intn(1000) + 1)
+	task.Date = time.Now().Format("2006-01-02")
 	tasks = append(tasks, task)
 	json.NewEncoder(w).Encode(task)
 }
