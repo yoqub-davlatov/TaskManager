@@ -101,7 +101,7 @@ class _ShowTasksState extends State<ShowTasks> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              Get.back();
+                              Get.offNamed(Routes.getHomeRoute());
                             },
                             icon: Icon(
                               Icons.home,
