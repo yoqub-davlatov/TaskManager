@@ -140,6 +140,7 @@ class _ShowTasksState extends State<ShowTasks> {
                     onDismissed: (direction) {},
                     confirmDismiss: (direction) async {
                       if (direction == DismissDirection.endToStart) {
+                        controller.deleteData(controller.myData[index]["id"]);
                         return Future.delayed(
                           const Duration(seconds: 1),
                           () => true,

@@ -50,8 +50,14 @@ func createTask(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(task)
 }
 
-func deletTask(w http.ResponseWriter, r *http.Request) {
-
+func deleteTask(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	for i := 0; i < len(tasks); i++ {
+		if tasks[i].ID == params["id"] {
+			tasks = append(tasks[:i], tasks[i + 1:]...)
+			return
+		}
+	}
 }
 
 func updateTask(w http.ResponseWriter, r *http.Request) {
@@ -75,7 +81,7 @@ func handleRoutes() {
 	router.HandleFunc("/gettasks", getTasks).Methods("GET")
 	router.HandleFunc("/gettask/{id}", getTask).Methods("GET")
 	router.HandleFunc("/create", createTask).Methods("POST")
-	router.HandleFunc("/delete/{id}", deletTask).Methods("DELETE")
+	router.HandleFunc("/delete/", deleteTask).Queries("id", "{id}").Methods("DELETE")
 	router.HandleFunc("/update/{id}", updateTask).Methods("PUT")
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
