@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
+import 'package:front/controllers/data_controller.dart';
 import 'package:front/widgets/button_widget.dart';
 import 'package:front/widgets/task_widget.dart';
 import 'package:get/get.dart';
 
-class ShowTasks extends StatelessWidget {
+class ShowTasks extends StatefulWidget {
   const ShowTasks({super.key});
 
   @override
+  State<ShowTasks> createState() => _ShowTasksState();
+}
+
+class _ShowTasksState extends State<ShowTasks> {
+  _loadData() async {
+    await Get.find<DataController>().getData();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List tasks = [
-      "Try Harder",
-      "Try Smarter",
-    ];
+    _loadData();
     final leftEditIcon = Container(
       margin: const EdgeInsets.only(
         bottom: 8,
@@ -111,7 +118,7 @@ class ShowTasks extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  "${tasks.length}",
+                  "${Get.find<DataController>().myData.length}",
                   style: TextStyle(
                     color: AppColors.secondaryColor,
                     fontSize: 26,
@@ -122,7 +129,7 @@ class ShowTasks extends StatelessWidget {
           ),
           Flexible(
             child: ListView.builder(
-              itemCount: tasks.length,
+              itemCount: Get.find<DataController>().myData.length,
               itemBuilder: (context, index) {
                 return Dismissible(
                   background: leftEditIcon,
@@ -176,7 +183,7 @@ class ShowTasks extends StatelessWidget {
                   },
                   key: ObjectKey(index),
                   child: TaskWidget(
-                    task: tasks[index],
+                    task: Get.find<DataController>().myData[index]["name"],
                   ),
                 );
               },

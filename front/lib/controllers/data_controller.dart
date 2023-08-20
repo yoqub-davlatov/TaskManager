@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:front/services/service.dart';
 import 'package:get/get.dart';
 
@@ -32,11 +34,10 @@ class DataController extends GetxController {
       },
     );
     if (response.statusCode == 200) {
-      _myData = response.body;
-      print("data was posted");
       update();
+      log("data was posted successfully");
     } else {
-      print("no data was posted");
+      log("no data was posted");
     }
   }
 }

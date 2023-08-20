@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
+import 'package:front/controllers/data_controller.dart';
+import 'package:front/screens/show_tasks.dart';
 import 'package:front/widgets/button_widget.dart';
+import 'package:front/widgets/error_widget.dart';
 import 'package:front/widgets/text_field_widget.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +14,20 @@ class AddTask extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController nameController = TextEditingController();
     TextEditingController detailController = TextEditingController();
+
+    bool _dataValidation() {
+      if (nameController.text.trim() == '') {
+        Message.taskErrorOrWarning(
+            "Task Name", "Your task name should not be empty!");
+        return false;
+      }
+      if (detailController.text.trim() == '') {
+        Message.taskErrorOrWarning(
+            "Task Detail", "Your task detail should not be empty!");
+        return false;
+      }
+      return true;
+    }
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -55,10 +72,24 @@ class AddTask extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                ButtonWidget(
-                  color: AppColors.mainColor,
-                  text: "Add",
-                  textColor: Colors.white,
+                GestureDetector(
+                  onTap: () {
+                    if (_dataValidation()) {
+                      Get.find<DataController>().postData(
+                        nameController.text,
+                        detailController.text,
+                      );
+                      Get.to(
+                        () => const ShowTasks(),
+                        transition: Transition.circularReveal,
+                      );
+                    }
+                  },
+                  child: ButtonWidget(
+                    color: AppColors.mainColor,
+                    text: "Add",
+                    textColor: Colors.white,
+                  ),
                 ),
               ],
             ),
