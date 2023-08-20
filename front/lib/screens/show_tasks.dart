@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
 import 'package:front/controllers/data_controller.dart';
+import 'package:front/screens/view_task.dart';
 import 'package:front/widgets/button_widget.dart';
 import 'package:front/widgets/task_widget.dart';
 import 'package:get/get.dart';
@@ -73,7 +74,7 @@ class _ShowTasksState extends State<ShowTasks> {
             width: double.maxFinite,
             height: MediaQuery.of(context).size.height / 3.2,
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 Get.back();
               },
               child: Icon(
@@ -128,65 +129,74 @@ class _ShowTasksState extends State<ShowTasks> {
             ),
           ),
           Flexible(
-            child: ListView.builder(
-              itemCount: Get.find<DataController>().myData.length,
-              itemBuilder: (context, index) {
-                return Dismissible(
-                  background: leftEditIcon,
-                  secondaryBackground: rightEditIcon,
-                  onDismissed: (direction) {},
-                  confirmDismiss: (direction) async {
-                    if (direction == DismissDirection.endToStart) {
-                      return Future.delayed(
-                        const Duration(seconds: 1),
-                        () => true,
-                      );
-                    }
-                    showModalBottomSheet(
-                        barrierColor: Colors.transparent,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (_) {
-                          return Container(
-                            height: 500,
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(20),
+            child: GetBuilder<DataController>(
+              builder: (controller) => ListView.builder(
+                itemCount: controller.myData.length,
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    background: leftEditIcon,
+                    secondaryBackground: rightEditIcon,
+                    onDismissed: (direction) {},
+                    confirmDismiss: (direction) async {
+                      if (direction == DismissDirection.endToStart) {
+                        return Future.delayed(
+                          const Duration(seconds: 1),
+                          () => true,
+                        );
+                      }
+                      showModalBottomSheet(
+                          barrierColor: Colors.transparent,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (_) {
+                            return Container(
+                              height: MediaQuery.of(context).size.height / 3,
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                ),
+                                color: const Color(0xFF2e3253).withOpacity(0.5),
                               ),
-                              color: const Color(0xFF2e3253).withOpacity(0.5),
-                            ),
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 20, right: 20),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  ButtonWidget(
-                                    color: AppColors.mainColor,
-                                    text: "View",
-                                    textColor: Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  ButtonWidget(
-                                    color: AppColors.mainColor,
-                                    text: "Edit",
-                                    textColor: Colors.blue,
-                                  ),
-                                ],
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, right: 20),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.off(() => ViewTask(
+                                            id: controller
+                                                .myData[index]["id"]));
+                                      },
+                                      child: ButtonWidget(
+                                        color: AppColors.mainColor,
+                                        text: "View",
+                                        textColor: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    ButtonWidget(
+                                      color: AppColors.mainColor,
+                                      text: "Edit",
+                                      textColor: Colors.blue,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        });
-                    return false;
-                  },
-                  key: ObjectKey(index),
-                  child: TaskWidget(
-                    task: Get.find<DataController>().myData[index]["name"],
-                  ),
-                );
-              },
+                            );
+                          });
+                      return false;
+                    },
+                    key: ObjectKey(index),
+                    child: TaskWidget(
+                      task: controller.myData[index]["name"],
+                    ),
+                  );
+                },
+              ),
             ),
           )
         ],

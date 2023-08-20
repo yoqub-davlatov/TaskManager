@@ -1,20 +1,23 @@
+import 'dart:developer';
+
+import 'package:front/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class DataService extends GetConnect implements GetxService {
-  Future<Response> getData() async {
+  Future<Response> getData(final String uri) async {
+    log(AppConstants.baseURL + uri);
     Response response = await get(
-      "http://localhost:8000/gettasks",
+      AppConstants.baseURL + uri,
       headers: {
         "Content-Type": "application/json; charset = UTF-8",
       },
     );
-    print(response.body);
     return response;
   }
 
-  Future<Response> postData(dynamic body) async {
+  Future<Response> postData(String uri, dynamic body) async {
     Response response = await post(
-      "http://localhost:8000/create",
+      AppConstants.baseURL + uri,
       body,
       headers: {
         "Content-Type": "application/json; charset = UTF-8",

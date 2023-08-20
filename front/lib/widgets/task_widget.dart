@@ -23,7 +23,7 @@ class TaskWidget extends StatelessWidget {
           child: Text(
             task,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 22,
               color: Colors.blueGrey,
             ),
           ),

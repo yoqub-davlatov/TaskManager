@@ -26,17 +26,12 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func getTask(w http.ResponseWriter, r *http.Request) {
-	taskID := mux.Vars(r)
-	flag := false
+	w.Header().Set("Content-Type", "application/json")
 	for i := 0; i < len(tasks); i++ {
-		if taskID["id"] == tasks[i].ID {
+		if tasks[i].ID == mux.Vars(r)["id"] {
 			json.NewEncoder(w).Encode(tasks[i])
-			flag = true
-			break
+			return
 		}
-	}
-	if !flag {
-		json.NewEncoder(w).Encode(map[string]string{"status": "Error"})
 	}
 }
 

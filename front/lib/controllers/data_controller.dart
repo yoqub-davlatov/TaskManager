@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:front/services/service.dart';
+import 'package:front/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class DataController extends GetxController {
@@ -11,10 +12,11 @@ class DataController extends GetxController {
   List<dynamic> _myData = [];
 
   List<dynamic> get myData => _myData;
-
+  Map<String, dynamic> _singleData = {};
+  Map<String, dynamic> get singleData => _singleData;
   Future<void> getData() async {
     _isLoading = true;
-    Response response = await service.getData();
+    Response response = await service.getData(AppConstants.getTasks);
     if (response.statusCode == 200) {
       _myData = response.body;
       print("data was received");
@@ -22,12 +24,28 @@ class DataController extends GetxController {
     } else {
       print("no data was received");
     }
+    _isLoading = false;
+  }
+
+  Future<void> getTask(final String id) async {
+    _isLoading = true;
+    Response response = await service.getData('${AppConstants.getTask}/$id');
+    if (response.statusCode == 200) {
+      _singleData = response.body;
+      log(_singleData.toString());
+      update();
+      print("task was received");
+    } else {
+      print("no task was received");
+    }
+    _isLoading = false;
   }
 
   Future<void> postData(String name, String detail) async {
     _isLoading = true;
 
     Response response = await service.postData(
+      AppConstants.postTask,
       {
         "name": name,
         "detail": detail,
@@ -39,5 +57,6 @@ class DataController extends GetxController {
     } else {
       log("no data was posted");
     }
+    _isLoading = false;
   }
 }
