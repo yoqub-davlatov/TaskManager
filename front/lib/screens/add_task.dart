@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
 import 'package:front/controllers/data_controller.dart';
-import 'package:front/screens/show_tasks.dart';
+import 'package:front/routes/routes.dart';
 import 'package:front/widgets/button_widget.dart';
 import 'package:front/widgets/error_widget.dart';
 import 'package:front/widgets/text_field_widget.dart';
@@ -79,10 +79,11 @@ class AddTask extends StatelessWidget {
                         nameController.text,
                         detailController.text,
                       );
-                      Get.to(
-                        () => const ShowTasks(),
-                        transition: Transition.circularReveal,
-                      );
+                      // Get.to(
+                      //   () => const ShowTasks(),
+                      //   transition: Transition.circularReveal,
+                      // );
+                      Get.offNamed(Routes.showTasks);
                     }
                   },
                   child: ButtonWidget(

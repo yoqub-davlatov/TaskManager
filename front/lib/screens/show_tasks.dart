@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/colors/app_colors.dart';
 import 'package:front/controllers/data_controller.dart';
-import 'package:front/screens/edit_task.dart';
-import 'package:front/screens/view_task.dart';
+import 'package:front/routes/routes.dart';
 import 'package:front/widgets/button_widget.dart';
 import 'package:front/widgets/task_widget.dart';
 import 'package:get/get.dart';
@@ -167,9 +166,10 @@ class _ShowTasksState extends State<ShowTasks> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Get.off(() => ViewTask(
-                                            id: controller.myData[index]
-                                                ["id"]));
+                                        // Get.off(() => ViewTask(
+                                        //     id: controller.myData[index]
+                                        //         ["id"]));
+                                        Get.toNamed(Routes.getViewTaskRoute(controller.myData[index]["id"]));
                                       },
                                       child: ButtonWidget(
                                         color: AppColors.mainColor,
@@ -182,9 +182,10 @@ class _ShowTasksState extends State<ShowTasks> {
                                     ),
                                     GestureDetector(
                                       onTap: () {
-                                        Get.off(() => EditTask(
-                                            id: controller.myData[index]
-                                                ["id"]));
+                                        // Get.off(() => EditTask(
+                                        //     id: controller.myData[index]
+                                        //         ["id"]));
+                                        Get.toNamed(Routes.getEditTaskRoute(controller.myData[index]["id"]));
                                       },
                                       child: ButtonWidget(
                                         color: AppColors.mainColor,

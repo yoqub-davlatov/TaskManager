@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/controllers/data_controller.dart';
+import 'package:front/routes/routes.dart';
 import 'package:front/screens/home_screen.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      initialRoute: Routes.getHomeRoute(),
+      getPages: Routes.routes,
       home: const HomeScreen(),
     );
   }
