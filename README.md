@@ -7,6 +7,10 @@ empower users in efficiently organizing their daily activities, projects, and to
 With a sleek and intuitive user interface developed using Flutter for the front-end and 
 Go for the server, the application offers a seamless experience for task creation, viewing, editing, and deletion.
 
+## Demo:
+
+https://github.com/yoqub-davlatov/TaskManager/assets/111530950/ad64e106-e6b2-4a32-9b0e-6be49937f646
+                                                                
 ## Key Features:
 
 1. **Task Creation:** The app allows users to effortlessly create new tasks, enabling them to capture their ideas and responsibilities as they arise. The app offers an intuitive task entry form with fields for task title, description, due date, priority, and any additional notes.
