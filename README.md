@@ -1,6 +1,6 @@
-# TaskManager
+# Streamlined Task Management App
 
-## Project Description: Streamlined Task Management App
+## Project Description: 
 
 Introducing a cutting-edge task management application designed to 
 empower users in efficiently organizing their daily activities, projects, and to-do lists. 
@@ -25,6 +25,48 @@ Go for the server, the application offers a seamless experience for task creatio
 
 - *Front-End:* Flutter - A versatile framework for building natively compiled applications for mobile, web, and desktop from a single codebase.
 - *Back-End:* Go - A powerful programming language known for its efficiency and performance, well-suited for building robust server-side applications.
+  
+## Project Installation:
+
+To install the application from the repository, follow these steps:
+
+1. *Clone the Git repository:*
+
+  Open your terminal or command prompt and navigate to the directory where you want to clone the repository. Then, run the following command:
+```bash
+https://github.com/yoqub-davlatov/TaskManager.git
+```
+2. *Navigate to the project directory:*
+
+   After cloning the repository, navigate to the project's root directory using the terminal or command prompt:
+```bash
+cd REPOSITORY_PATH
+```
+
+3. *Run the server:*
+
+   Before you start the app make sure the server is running. For that make sure Golang is set up on your device. Then go to ```back\src``` folder, and run ```main.go```.
+   
+4. *Connect a device:*
+
+  Connect your Android device to your computer or set up an emulator to run the Flutter application. If you are using your device make sure to run the following code on your terminal:
+  
+  ```bash
+  adb reverse tcp:8000 tcp:8000
+  ```
+  
+7. *Run the application:*
+
+   To run the Flutter application on a connected device or emulator, go to ```front``` folder and use the `flutter run` command:
+   
+```bash
+flutter run
+```
+The application will be compiled and launched on your device or emulator.
+
+8. *Use the application:*
+
+  Well done! Enjoy using the app with its user-friendly interface!
 
 ## Future Enhancements:
 
